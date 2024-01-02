@@ -10,7 +10,7 @@ const HomePage = () => {
                 <Col xs={1} /> 
                 <Col xs={10}>
                    
-                <h3>Grammed</h3>
+                
                 </Col>
                 <Col xs={1} /> 
             </Row>
