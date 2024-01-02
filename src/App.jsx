@@ -1,14 +1,19 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import React from "react";
+import RestaurantContainer from "../components/restaurant-container";
+import jsonData from "../Data/mock_restaurant_DB.json"; // Import your JSON data
 
-function App() {
-  const [count, setCount] = useState(0)
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+
+const App = () => {
+  const { restaurants } = jsonData;
 
   return (
-    <>
-      <h1>Hi</h1>
-    </>
-  )
-}
+    <div>
+      <RestaurantContainer restaurants={restaurants} />
+    </div>
+  );
+};
 
-export default App
+export default App;
