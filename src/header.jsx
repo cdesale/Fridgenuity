@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 const Header = () => {
 
   return (
-     <div style={{ border: '5px solid #B522E1', backgroundColor: 'white', padding: '10px', borderRadius: '10px'}}>
+     <div style={{ border: '5px solid #B522E1', backgroundColor: 'white', padding: '10px', borderRadius: '10px', fontFamily: 'Lato, sans-serif'}}>
       <Container fluid="md">
         <Row>
           <Col xs={1} />
