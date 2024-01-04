@@ -1,0 +1,35 @@
+.container {
+    margin-top: 30px;
+}
+
+.row {
+    border: solid 2px #FF4CE7;
+}
+
+.form-group {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.form-label {
+    color: #FF4CE7;
+    font-size: large;
+    font-family: sans-serif;
+}
+
+.form-control {
+    border: 1px solid #FF4CE7;
+}
+
+.button {
+    background: #1982DE;
+    margin: 30px 0px;
+}
+
+.progress-bar{
+    margin-top: 10px;
+}
+input[type="file"] {
+    margin-top: 10px;
+  }
+  
