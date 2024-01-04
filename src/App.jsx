@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./homePage";
 import ProfilePage from "./profilePage";
 import RestaurantContainer from "../components/restaurant-container";
+import RestaurantForm from "../components/RestaurantForm";
 import jsonData from "../Data/mock_restaurant_DB.json"; // Import your JSON data
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
@@ -22,6 +23,7 @@ function App() {
             element={<RestaurantContainer restaurants={restaurants} />}
           />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path='/form' element={<RestaurantForm/>}/>
         </Routes>
       </BrowserRouter>
     </>
