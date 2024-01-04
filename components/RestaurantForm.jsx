@@ -8,7 +8,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import Error from "./Error";
-import "./RestaurantForm.css";
+import "../assets/RestaurantForm.css";
 
 export const RestaurantForm = () => {
   const [formData, setFormData] = useState({
