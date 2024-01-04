@@ -15,7 +15,7 @@ export const RestaurantCard = (props) => {
           <p className="card-text">
             <strong>Description:</strong> {restaurant.description}
           </p>
-          <p className="card-text">
+          <p className="card-text"> 
             <strong>Cuisine type: </strong>
             {restaurant.cuisines}
           </p>
