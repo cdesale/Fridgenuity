@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { getAllRestaurants } from "../utils/api";
 import { RestaurantCard } from "./RestaurantCard";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export const RestaurantContainer = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -12,7 +14,7 @@ export const RestaurantContainer = () => {
     setIsLoading(true);
 
     getAllRestaurants()
-      .then(({data}) => {
+      .then(({ data }) => {
         setRestaurants(data);
         setIsLoading(false);
       })
@@ -44,6 +46,11 @@ export const RestaurantContainer = () => {
       {restaurants.map((restaurant, index) => (
         <RestaurantCard restaurant={restaurant} key={index} />
       ))}
+      <Link to="/form">
+        <Button className="btn btn-primary mt-3">
+          Add Grammable Restaurant
+        </Button>
+      </Link>
     </div>
   );
 };
