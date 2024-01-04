@@ -29,3 +29,7 @@
 .progress-bar{
     margin-top: 10px;
 }
+input[type="file"] {
+    margin-top: 10px;
+  }
+  

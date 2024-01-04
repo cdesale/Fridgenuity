@@ -47,7 +47,8 @@ const RestaurantForm = () => {
     
         setError(errorMessages);
         if (errorMessages.length === 0) {
-          console.log(formData); 
+            window.alert("Submission succeeded!");
+          console.log(formData); //// make a call to post/new-restaurant
         }
       };
 

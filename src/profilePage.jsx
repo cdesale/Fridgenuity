@@ -9,7 +9,7 @@ const ProfilePage = () => {
             <Row style={{ marginTop: '30px' }}>
                 <Col xs={1} /> 
                 <Col xs={10}>
-                   
+                    Hello user, welcome to your grammable location page!
                 
                 </Col>
                 <Col xs={1} /> 
