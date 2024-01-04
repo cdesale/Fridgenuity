@@ -6,7 +6,7 @@ import HomePage from "./homePage";
 import ProfilePage from "./profilePage";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
-import { RestaurantContainer } from "../components/restaurant-container";
+import { RestaurantContainer } from "../components/RestaurantContainer";
 
 function App() {
   return (
