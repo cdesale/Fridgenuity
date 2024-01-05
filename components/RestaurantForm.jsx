@@ -178,7 +178,7 @@ export const RestaurantForm = () => {
               </div>
             )}
             {error.length > 0 && <Error errors={error} />}
-            <Button variant="primary" type="submit" className="button">
+            <Button variant="primary" type="submit" className="button" style={{ backgroundColor: '#1982DE', color: 'white', borderRadius: '70px' }} >
               Submit
             </Button>
           </Form>

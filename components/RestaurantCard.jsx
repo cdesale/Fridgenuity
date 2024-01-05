@@ -38,3 +38,4 @@ export const RestaurantCard = (props) => {
    </Container>
   );
 };
+
