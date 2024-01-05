@@ -5,10 +5,10 @@ export const RestaurantCard = (props) => {
   const { restaurant } = props;
 
   return (
-    <Container>
-      <Row className="justify-content-md-center">
+    <Container >
+      <Row className="justify-content-md-center" style={{ border: '3px solid #FF4CE7', backgroundColor: 'white', padding: '10px', borderRadius: '10px'}}>
       <Col xs={12} sm={10} md={8}>
-          <Card>
+          <Card style={{border: '0'}}>
             <Card.Body>
               <Card.Title>
                 <strong>Restaurant Name: </strong>
@@ -32,9 +32,9 @@ export const RestaurantCard = (props) => {
                 style={{ maxWidth: '80%', maxHeight: '300px' }} 
               />
             </Card.Body>
-          </Card>
+         </Card>
         </Col>
       </Row>
-    </Container>
+   </Container>
   );
 };
