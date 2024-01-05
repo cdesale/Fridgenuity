@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { storage } from "../config/firebaseConfig";
 import {
@@ -10,6 +10,7 @@ import {
 import Error from "./Error";
 import "../assets/RestaurantForm.css";
 import cities from '../Data/mock_city_DB.json'
+import { loadGoogleMapsScript, initAutocomplete, getPlaceDetails } from '../utils/mapApi';
 
 export const RestaurantForm = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +26,23 @@ export const RestaurantForm = () => {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [error, setError] = useState([]);
+
+
+  useEffect(() => {
+    loadGoogleMapsScript(() => {
+      initAutocomplete('autocomplete', (autocomplete) => {
+        const placeDetails = getPlaceDetails(autocomplete);
+        if (placeDetails) {
+          setFormData({
+            ...formData,
+            address: placeDetails.address,
+            latitude: placeDetails.latitude,
+            longitude: placeDetails.longitude,
+          });
+        }
+      });
+    }, 'AIzaSyCseWSb0T4rbAKc_as_DuULSjybA_D3X3U');
+  }, []);
 
 
   const handleChange = (e) => {
@@ -146,15 +164,18 @@ export const RestaurantForm = () => {
               />
             </Form.Group>
 
-            <Form.Group controlId="formAddress" className="form-group">
-              <Form.Label className="form-label">Address</Form.Label>
-              <Form.Control
-                type="text"
-                name="address"
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
+            <Form.Group className="form-group">
+    <Form.Label className="form-label">Address</Form.Label>
+    <Form.Control
+        type="text"
+        id="autocomplete"
+        name="address"
+        onFocus={initAutocomplete}
+        onChange={handleChange}
+        required
+    />
+</Form.Group>
+
             <Form.Group controlId="formAddress" className="form-group">
               <Form.Label className="form-label">Upload restaurant photos:</Form.Label>
               <Form.Control
