@@ -8,6 +8,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import { RestaurantContainer } from "../components/RestaurantContainer";
 import { RestaurantForm } from "../components/RestaurantForm";
+import { LogInRegister } from "../components/LogInRegister";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<RestaurantContainer />} />
+          <Route path="/" element={<LogInRegister />} />
+          <Route path="/restaurants" element={<RestaurantContainer />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/form" element={<RestaurantForm />} />
         </Routes>
