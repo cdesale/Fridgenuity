@@ -3,8 +3,12 @@ import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import "../assets/RestaurantForm.css";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import { logIn, register } from "../utils/userapi";
+import { useNavigate } from "react-router-dom";
 
 export const LogInRegister = () => {
+  const navigate = useNavigate();
+
   const [showLogin, setShowLogin] = useState(true);
   const [showLoginError, setShowLoginError] = useState(false);
   const [showRegistrationError, setShowRegistrationError] = useState(false);
@@ -22,7 +26,16 @@ export const LogInRegister = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setShowLoginError(true);
+    setShowLoginError(false);
+
+    logIn(emailID, password).then((data) => {
+      if (data === null) {
+        setShowLoginError(true);
+        return;
+      }
+
+      navigate("/restaurants");
+    });
   };
 
   const handleRegistration = (e) => {
@@ -46,6 +59,9 @@ export const LogInRegister = () => {
       setShowRegistrationError(true);
       return;
     }
+    register(username, emailID, password).then(() => {
+      navigate("/restaurants");
+    });
     setShowRegistrationError(false);
     setRegisterError("");
   };
@@ -102,11 +118,20 @@ export const LogInRegister = () => {
                   <Form.Control
                     type="password"
                     placeholder="Enter password"
-                    onChange={(e) => setEmailId(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit" className="mt-3" style={{ backgroundColor: '#1982DE', color: 'white', borderRadius: '70px' }}>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="mt-3"
+                  style={{
+                    backgroundColor: "#1982DE",
+                    color: "white",
+                    borderRadius: "70px",
+                  }}
+                >
                   Login
                 </Button>
                 <p className="mt-3 mb-0">
