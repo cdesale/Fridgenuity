@@ -80,9 +80,8 @@ export const RestaurantContainer = () => {
         </Button>
       </Link>
 
-      {restaurants.map((restaurant, index) => (
-        <RestaurantCard restaurant={restaurant} key={index} />
-      ))}
+     
+      
 
     </div>
   );
