@@ -106,7 +106,7 @@ export const LogInRegister = () => {
                     required
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit" className="mt-3">
+                <Button variant="primary" type="submit" className="mt-3" style={{ backgroundColor: '#1982DE', color: 'white', borderRadius: '70px' }}>
                   Login
                 </Button>
                 <p className="mt-3 mb-0">
@@ -191,7 +191,6 @@ export const LogInRegister = () => {
       <p className="mt-2 mb-0">
         <Link to="/restaurants">Skip login/register</Link>
       </p>
-      ;
     </Container>
   );
 };

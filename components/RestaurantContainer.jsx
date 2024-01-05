@@ -1,17 +1,38 @@
-import React, { useEffect } from "react";
-import { getAllRestaurants } from "../utils/api";
+import React, { useEffect, useState } from 'react';
+
 import { RestaurantCard } from "./RestaurantCard";
-import { useState } from "react";
+
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { getAllRestaurants, getRestaurantsByCity } from "../utils/api";
+import SearchBar from './SearchBar';
 
 export const RestaurantContainer = () => {
+  
+
   const [restaurants, setRestaurants] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSearch = (City) => {
+    setIsLoading(true);
+    setErrorMessage('');
+
+    getRestaurantsByCity(City)
+      .then(({ data }) => {
+        setRestaurants(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setErrorMessage('No restaurants found');
+        setIsLoading(false);
+        console.error('Error fetching restaurants:', error);
+      });
+  };
 
   useEffect(() => {
     setIsLoading(true);
+    setErrorMessage('');
 
     getAllRestaurants()
       .then(({ data }) => {
@@ -19,38 +40,40 @@ export const RestaurantContainer = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        setErrorMessage("Error fetching restaurants");
+        setErrorMessage('Error fetching restaurants');
         setIsLoading(false);
-        console.error("Error fetching restaurants:", error);
+        console.error('Error fetching restaurants:', error);
       });
   }, []);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (errorMessage) {
-    return <p>{errorMessage}</p>;
-  }
-
-  if (!Array.isArray(restaurants) || restaurants.length === 0) {
-    return <p>No restaurants available</p>;
-  }
-
   return (
-    <div
-      className="container mt-4"
-      style={{ border: "2px solid #FF4CE7", padding: "10px" }}
-    >
+    <div className="container mt-4" >
       <h1 className="mb-4">Restaurant Explorer</h1>
-      {restaurants.map((restaurant, index) => (
-        <RestaurantCard restaurant={restaurant} key={index} />
-      ))}
+      <SearchBar handleSearch={handleSearch} />
+
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : errorMessage ? (
+        <p>{errorMessage}</p>
+      ) : (
+        <div>
+          {restaurants.length > 0 ? (
+            <ul>
+              {restaurants.map((restaurant, index) => (
+                <RestaurantCard restaurant={restaurant} key={index} />
+              ))}
+            </ul>
+            ) : (
+              <p>No restaurants found</p>
+            )}
+          </div>
+        )}
+  
+
       <Link to="/form">
-        <Button className="btn btn-primary mt-3">
-          Add Grammable Restaurant
-        </Button>
+        <Button className="btn btn-primary mt-3"  style={{ backgroundColor: '#1982DE', borderRadius: '20px' }}>Add Grammable Restaurant</Button>
       </Link>
     </div>
   );
 };
+

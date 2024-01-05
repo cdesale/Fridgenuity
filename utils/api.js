@@ -6,3 +6,10 @@ export const getAllRestaurants = () => {
     return { data };
   });
 };
+
+export const getRestaurantsByCity = (city) => {
+  let url = `http://localhost:5106/restaurants/city/${city}`;
+  return axios.get(url).then(({ data }) => {
+    return { data };
+  });
+};
