@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { storage } from "../config/firebaseConfig";
@@ -10,27 +9,30 @@ import {
 } from "firebase/storage";
 import Error from "./Error";
 import "../assets/RestaurantForm.css";
+import cities from '../Data/mock_city_DB.json'
 
 export const RestaurantForm = () => {
   const [formData, setFormData] = useState({
     city: "",
     cuisines: "",
     name: "",
-    specialty: "",
     description: "",
     address: "",
-    photo: null,
-    photosUrl: "",
+    photosUrl: [],
   });
+  const [photo, setPhoto] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [error, setError] = useState([]);
+
 
   const handleChange = (e) => {
     if (e.target.name === "photo") {
       const file = e.target.files[0];
       if (file) {
-        setFormData({ ...formData, photo: file });
+        setPhoto(file);
+        setUploadedFileNames(prevFileNames => [...prevFileNames, file.name]);
         handleUpload(file);
       }
     } else {
@@ -80,7 +82,7 @@ export const RestaurantForm = () => {
         getDownloadURL(uploadTask.snapshot.ref).then((photoUrl) => {
           setFormData((prevFormData) => ({
             ...prevFormData,
-            photosUrl: photoUrl,
+            photosUrl: [...prevFormData.photosUrl, photoUrl]
           }));
           console.log("Upload succeeded");
           setUploading(false);
@@ -102,8 +104,11 @@ export const RestaurantForm = () => {
                 onChange={handleChange}
                 required
               >
-                <option value="london">London</option>
-                {/* make a call to get/all-cities */}
+                {cities.map((city,index) => (
+          <option key={index}>
+            {city}
+          </option>
+        ))}
               </Form.Control>
             </Form.Group>
 
@@ -121,20 +126,10 @@ export const RestaurantForm = () => {
             </Form.Group>
 
             <Form.Group controlId="formName" className="form-group">
-              <Form.Label className="form-label">Name</Form.Label>
+              <Form.Label className="form-label">Restaurant Name</Form.Label>
               <Form.Control
                 type="text"
                 name="name"
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formSpecialty" className="form-group">
-              <Form.Label className="form-label">Specialty</Form.Label>
-              <Form.Control
-                type="text"
-                name="specialty"
                 onChange={handleChange}
                 required
               />
@@ -160,13 +155,16 @@ export const RestaurantForm = () => {
                 required
               />
             </Form.Group>
-            <input
-              type="file"
-              name="photo"
-              onChange={handleChange}
-              disabled={uploading}
-              required
-            />
+            <Form.Group controlId="formAddress" className="form-group">
+              <Form.Label className="form-label">Upload restaurant photos:</Form.Label>
+              <Form.Control
+                type="file"
+                name="photo"
+                onChange={handleChange}
+                disabled={uploading}
+                required
+              />
+            </Form.Group>
             {uploading && (
               <div className="progress-bar">
                 <div
@@ -177,6 +175,9 @@ export const RestaurantForm = () => {
                 </div>
               </div>
             )}
+            <div style={{ whiteSpace: 'nowrap', overflow: 'auto', maxWidth: '100%' }}>
+              {uploadedFileNames.join(',   ')}
+            </div>
             {error.length > 0 && <Error errors={error} />}
             <Button variant="primary" type="submit" className="button" style={{ backgroundColor: '#1982DE', color: 'white', borderRadius: '70px' }} >
               Submit

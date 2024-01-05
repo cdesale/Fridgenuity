@@ -73,11 +73,17 @@ export const RestaurantContainer = () => {
         </div>
       )}
 
+
       <Link to="/form">
         <Button className="btn btn-primary mt-3" style={{ backgroundColor: '#1982DE', borderRadius: '20px' }}>
           Add Grammable Restaurant
         </Button>
       </Link>
+
+      {restaurants.map((restaurant, index) => (
+        <RestaurantCard restaurant={restaurant} key={index} />
+      ))}
+
     </div>
   );
 };
