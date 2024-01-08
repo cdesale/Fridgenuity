@@ -1,3 +1,4 @@
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -5,7 +6,11 @@ import { PostedCard } from '../components/PostedCard';
 import { getRestaurantsByUserId, deleteRestaurantById } from '../utils/api'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { UserContext } from "../components/UserContext";
+
 const ProfilePage = () => {
+    const { user } = useContext(UserContext);
     const [restaurants, setRestaurants] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState([]);
@@ -52,6 +57,11 @@ const ProfilePage = () => {
                     <Col xs={1} />
                     <Col xs={10}>
                         Hello user, welcome to your grammable location page!
+                           {!user && (
+              <Link to={"/"}>
+                Please login/register to create your profile page
+              </Link>
+            )}
                         <Link to="/form">
                             <p>Post a new restaurant here</p>
                         </Link>
@@ -84,3 +94,4 @@ const ProfilePage = () => {
     )
 }
 export default ProfilePage
+
