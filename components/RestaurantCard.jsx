@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import FancyBox from './FancyBox';
+
 
 export const RestaurantCard = (props) => {
   const { restaurant } = props;
 
   return (
     <Container >
-      <Row className="justify-content-md-center" style={{ border: '3px solid #FF4CE7', backgroundColor: 'white', padding: '10px', borderRadius: '10px'}}>
+      <Row className="justify-content-md-center" style={{ backgroundColor: 'white', padding: '10px', borderRadius: '10px'}}>
       <Col xs={12} sm={10} md={8}>
           
           <Card style={{border: '0'}}>

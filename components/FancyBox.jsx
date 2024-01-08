@@ -17,7 +17,7 @@ const FancyBox = ({ children }) => {
       className="fancyBox"
       style={{
         color: 'black',
-        border: '5px solid rgb(246, 244, 243)',
+        border: '3px solid #FF4CE7',
         borderRadius: '20px',
         padding: '20px',
         margin: '10px',
