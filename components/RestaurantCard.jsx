@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import FancyBox from './FancyBox';
 
 export const RestaurantCard = (props) => {
   const { restaurant } = props;
@@ -8,6 +9,7 @@ export const RestaurantCard = (props) => {
     <Container >
       <Row className="justify-content-md-center" style={{ border: '3px solid #FF4CE7', backgroundColor: 'white', padding: '10px', borderRadius: '10px'}}>
       <Col xs={12} sm={10} md={8}>
+          
           <Card style={{border: '0'}}>
             <Card.Body>
               <Card.Title>
@@ -19,7 +21,7 @@ export const RestaurantCard = (props) => {
               </Card.Text>
               <Card.Text>
                 <strong>Cuisine type: </strong>
-                {restaurant.cuisines}
+                {restaurant.cuisine}
               </Card.Text>
               <Card.Text>
                 <strong>Address: </strong>
@@ -33,6 +35,7 @@ export const RestaurantCard = (props) => {
               />
             </Card.Body>
          </Card>
+        
         </Col>
       </Row>
    </Container>
