@@ -56,3 +56,10 @@ export const getRestaurantsByUserId = () => {
     return { data };
   });
 };
+
+export const postRestaurant = (formData) => {
+  let url = `http://localhost:5106/restaurants`;
+  return axios.post(url, formData).then(({ data }) => {
+    return { data };
+  });
+};

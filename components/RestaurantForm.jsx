@@ -11,53 +11,70 @@ import Error from "./Error";
 import "../assets/RestaurantForm.css";
 import cities from '../Data/mock_city_DB.json'
 import { loadGoogleMapsScript, initAutocomplete, getPlaceDetails } from '../utils/mapApi';
+import { postRestaurant, getAllCuisines } from '../utils/api';
+
 
 export const RestaurantForm = () => {
-  const [formData, setFormData] = useState({
+  const defaultFormData = {
     city: "",
-    cuisines: "",
+    cuisine: "",
     name: "",
     description: "",
     address: "",
     photosUrl: [],
-  });
-  const [photo, setPhoto] = useState(null);
+    longitude: 0,
+    latitude: 0,
+    userId: 1,
+    votes: 0,
+    createAt: new Date().toISOString()
+  };
+
+  const [formData, setFormData] = useState(defaultFormData);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [error, setError] = useState([]);
-
+  const [cuisines, setCuisines] = useState([]);
 
   useEffect(() => {
     loadGoogleMapsScript(() => {
       initAutocomplete('autocomplete', (autocomplete) => {
         const placeDetails = getPlaceDetails(autocomplete);
         if (placeDetails) {
-          setFormData({
-            ...formData,
+          setFormData(prevFormData => ({
+            ...prevFormData,
             address: placeDetails.address,
             latitude: placeDetails.latitude,
             longitude: placeDetails.longitude,
-          });
+          }));
         }
       });
     }, 'AIzaSyCseWSb0T4rbAKc_as_DuULSjybA_D3X3U');
   }, []);
 
+  useEffect(() => {
+    getAllCuisines()
+      .then(cuisinesData => {
+        setCuisines(cuisinesData.data); 
+      })
+      .catch(error => console.error('Error fetching cuisines:', error));
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.name === "photo") {
       const file = e.target.files[0];
       if (file) {
-        setPhoto(file);
         setUploadedFileNames(prevFileNames => [...prevFileNames, file.name]);
         handleUpload(file);
       }
     } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [e.target.name]: e.target.value
+      }));
     }
   };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     let errorMessages = [];
@@ -72,8 +89,8 @@ export const RestaurantForm = () => {
 
     setError(errorMessages);
     if (errorMessages.length === 0) {
-      window.alert("Submission succeeded!");
-      console.log(formData); //// make a call to post/new-restaurant
+      console.log(formData); 
+      postRestaurant(formData)
     }
   };
 
@@ -132,15 +149,11 @@ export const RestaurantForm = () => {
 
             <Form.Group controlId="formCuisine" className="form-group">
               <Form.Label className="form-label">Cuisine</Form.Label>
-              <Form.Control
-                as="select"
-                name="cuisine"
-                onChange={handleChange}
-                required
-              >
-                <option value="thai">Thai</option>
-                {/* make a call to get/all-cuisines*/}
-              </Form.Control>
+              <Form.Control as="select" name="cuisine" onChange={handleChange} required>
+        {cuisines.map((cuisine, index) => (
+          <option key={index} value={cuisine.toLowerCase()}>{cuisine}</option>
+        ))}
+      </Form.Control>
             </Form.Group>
 
             <Form.Group controlId="formName" className="form-group">

@@ -28,9 +28,7 @@ export const PostedCard = (props) => {
         />
       </Card.Body>
       <div style={{ display: 'flex', justifyContent: 'space-evenly', paddingBottom: '10px' }}>
-        <Link to={{
-          pathname: '/form',
-        }}><button><img src="../assets/edit.png" alt="edit" style={{ width: '20px' }} /></button></Link>
+        <Link to='/form'><button><img src="../assets/edit.png" alt="edit" style={{ width: '20px' }} /></button></Link>
         <button onClick={() => deleteRestaurant(restaurant.id)}><img src="../assets/delete.png" alt="delete" style={{ width: '20px' }} /></button>
       </div>
     </Card>
