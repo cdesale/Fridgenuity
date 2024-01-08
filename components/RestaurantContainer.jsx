@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { RestaurantCard } from './RestaurantCard';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { getAllRestaurants, getRestaurantsByCity, getRestaurantsByCuisine, getRestaurantsByCuisineAndCity } from '../utils/api';
+import { getAllRestaurants, getRestaurantsByCity } from '../utils/api';
 import SearchBar from './SearchBar';
-import SortBar from './SortBar';
-import { RestaurantCard } from './RestaurantCard';
-import FancyBox from './FancyBox';
 
 export const RestaurantContainer = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedCuisine, setSelectedCuisine] = useState('');
 
   const fetchAllRestaurants = () => {
     setIsLoading(true);
-    setErrorMessage('');
+    setErrorMessage("");
 
     getAllRestaurants()
       .then(({ data }) => {
@@ -24,19 +22,18 @@ export const RestaurantContainer = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        setErrorMessage('Error fetching restaurants');
+        setErrorMessage("Error fetching restaurants");
         setIsLoading(false);
-        console.error('Error fetching restaurants:', error);
+        console.error("Error fetching restaurants:", error);
       });
   };
 
   const handleSearch = (city) => {
-    setSelectedCity(city);
     if (city.trim() === '') {
       fetchAllRestaurants();
     } else {
       setIsLoading(true);
-      setErrorMessage('');
+      setErrorMessage("");
 
       getRestaurantsByCity(city)
         .then(({ data }) => {
@@ -44,9 +41,9 @@ export const RestaurantContainer = () => {
           setIsLoading(false);
         })
         .catch((error) => {
-          setErrorMessage('No restaurants found');
+          setErrorMessage("No restaurants found");
           setIsLoading(false);
-          console.error('Error fetching restaurants:', error);
+          console.error("Error fetching restaurants:", error);
         });
     }
   };
@@ -101,7 +98,6 @@ export const RestaurantContainer = () => {
      
       <h1 className="mb-4" style={{ padding: '5px' }}>Restaurant Explorer</h1>
       <SearchBar handleSearch={handleSearch} />
-      <SortBar handleSort={handleSortByCuisine} />
 
       {isLoading ? (
         <p>Loading...</p>
@@ -122,7 +118,16 @@ export const RestaurantContainer = () => {
         </div>
       )}
 
+
+      <Link to="/form">
+        <Button className="btn btn-primary mt-3" style={{ backgroundColor: '#1982DE', borderRadius: '20px' }}>
+          Add Grammable Restaurant
+        </Button>
+      </Link>
+
+     
       
+
     </div>
   );
 };
