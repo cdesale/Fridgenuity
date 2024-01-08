@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import "../assets/RestaurantForm.css";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { logIn, register } from "../utils/userapi";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
 
 export const LogInRegister = () => {
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    // Go to restaurants page if user is already logged in.
+    if (user !== null) {
+      console.log(`This user is already logged in: ${user}`);
+      navigate("/restaurants");
+    }
+  }, []);
 
   const [showLogin, setShowLogin] = useState(true);
   const [showLoginError, setShowLoginError] = useState(false);
@@ -28,12 +38,13 @@ export const LogInRegister = () => {
     e.preventDefault();
     setShowLoginError(false);
 
-    logIn(emailID, password).then((data) => {
+    logIn(emailID, password).then(({ data }) => {
       if (data === null) {
         setShowLoginError(true);
         return;
       }
 
+      setUser(data);
       navigate("/restaurants");
     });
   };
@@ -41,8 +52,6 @@ export const LogInRegister = () => {
   const handleRegistration = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      console.log(password, "true");
-      console.log(confirmPassword, "confirm");
       setRegisterError(
         "Confirm password does not match with the entered password "
       );
@@ -59,12 +68,16 @@ export const LogInRegister = () => {
       setShowRegistrationError(true);
       return;
     }
-    register(username, emailID, password).then(() => {
+
+    register(username, emailID, password).then(({ data }) => {
+      setUser(data);
       navigate("/restaurants");
     });
+
     setShowRegistrationError(false);
     setRegisterError("");
   };
+
   const validatePassword = (password) => {
     const minLength = 8;
     const hasAlphanumeric = /[a-zA-Z]/.test(password);
