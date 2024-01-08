@@ -19,7 +19,7 @@ export const RestaurantCard = (props) => {
               </Card.Text>
               <Card.Text>
                 <strong>Cuisine type: </strong>
-                {restaurant.cuisines}
+                {restaurant.cuisine}
               </Card.Text>
               <Card.Text>
                 <strong>Address: </strong>
