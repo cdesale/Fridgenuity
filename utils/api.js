@@ -43,3 +43,16 @@ export const getCuisinesByCity = (city) => {
   });
 };
 
+export const deleteRestaurantById =(id)=>{
+  let url = `http://localhost:5106/restaurants/${id}`;
+  return axios.delete(url).then(({ data }) => {
+    return { data };
+  });
+}
+//set id later
+export const getRestaurantsByUserId = () => {
+  let url = `http://localhost:5106/restaurants/user/1`;
+  return axios.get(url).then(({ data }) => {
+    return { data };
+  });
+};
