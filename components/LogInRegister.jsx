@@ -100,9 +100,9 @@ export const LogInRegister = () => {
   return (
     <Container
       className="mt-4 px-4 py-3"
-      style={{ maxWidth: "400px", borderRadius: "5px", background: "#f8f9fa" }}
+      style={{ maxWidth: "400px", borderRadius: "5px" }}
     >
-      <Card className="custom-border">
+      <Card className="custom-border" style={{ borderRadius: "10px" }}>
         <Card.Body>
           {showLogin ? (
             <>

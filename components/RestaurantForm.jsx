@@ -160,7 +160,7 @@ export const RestaurantForm = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className='form-row'>
         <Col md={{ span: 6, offset: 3 }}>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formCity" className="form-group">
