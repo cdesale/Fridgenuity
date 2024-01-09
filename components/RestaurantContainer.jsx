@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Col } from 'react-bootstrap';
 import { getAllRestaurants, getRestaurantsByCity, getRestaurantsByCuisine, getRestaurantsByCuisineAndCity } from '../utils/api';
 import SearchBar from './SearchBar';
 import SortBar from './SortBar';
@@ -93,19 +93,23 @@ export const RestaurantContainer = () => {
 
   return (
     <div className=" mt-4" >
-     <Link to="/form">
-        <Button className="btn btn-primary mt-3" style={{ backgroundColor: '#1982DE', borderRadius: '20px', marginBottom:'18px'}}>
+     <h1 className="mb-4" style={{ padding: '5px' }}>Restaurant Explorer</h1>
+      
+      <Link to="/form">
+        <Button className="btn btn-primary mt-3" style={{ backgroundColor: '#1982DE', borderRadius: '25px', marginBottom:'25px'}}>
           Add Your Place🍝
         </Button>
       </Link>
-      <h1 className="mb-4" style={{ padding: '5px' }}>Restaurant Explorer</h1>
       <SearchBar handleSearch={handleSearch} />
       <SortBar handleSort={handleSortByCuisine} />
+      
+     
       {isLoading ? (
         <p>Loading...</p>
       ) : errorMessage ? (
         <p>{errorMessage}</p>
       ) : (
+       
         <div>
           {restaurants.length > 0 ? (
            <ul>
@@ -116,8 +120,10 @@ export const RestaurantContainer = () => {
           ) : (
             <p>No restaurants found</p>
           )}
+         
         </div>
       )}
+     
     </div>
   );
 };
