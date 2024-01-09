@@ -10,7 +10,7 @@ import { RestaurantContainer } from "../components/RestaurantContainer";
 import { RestaurantForm } from "../components/RestaurantForm";
 import { LogInRegister } from "../components/LogInRegister";
 import { UserProvider } from "../components/UserContext";
-import Footer from "../components/Footer";
+
 
 function App() {
   return (
@@ -23,8 +23,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/form" element={<RestaurantForm />} />
         </Routes>
-        <Footer />
-      </BrowserRouter>
+        </BrowserRouter>
     </UserProvider>
   );
 }

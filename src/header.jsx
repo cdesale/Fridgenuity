@@ -1,5 +1,6 @@
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
+import Logout from '../components/Logout';
 
 const Header = () => {
 
@@ -16,6 +17,7 @@ const Header = () => {
           <Link to="/profile">
               <Button style={{ backgroundColor: '#1982DE', color: 'white', borderRadius: '70px' }}>Profile</Button>
             </Link>
+            <Logout/>
           </Col>
           <Col xs={1} />
         </Row>

@@ -8,7 +8,7 @@ export const RestaurantCard = (props) => {
 
   return (
     <Container >
-      <Row className="justify-content-md-center" style={{ backgroundColor: 'white', padding: '10px', borderRadius: '10px' }}>
+      <Row className="justify-content-md-center"  style={{ backgroundColor: 'white', padding: '10px', borderRadius: '10px' }}>
         <Col xs={12} sm={10} md={8}>
 
           <Card style={{ border: '0' }}>
@@ -40,7 +40,7 @@ export const RestaurantCard = (props) => {
               />
             </Card.Body>
           </Card>
-
+          
         </Col>
       </Row>
     </Container>
