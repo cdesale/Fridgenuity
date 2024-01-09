@@ -1,13 +1,30 @@
-import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import {loadGoogleMapsScript} from '../utils/mapApi'
+export const RestaurantCard = ({ restaurant }) => {
+  const mapRef = useRef(null);
 
+  const initMap = () => {
+    const myLatLng = { lat: restaurant.latitude, lng: restaurant.longitude };
+    const map = new google.maps.Map(mapRef.current, {
+      zoom: 15,
+      center: myLatLng,
+    });
 
-export const RestaurantCard = (props) => {
-  const { restaurant } = props;
+    new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: restaurant.name,
+    });
+  };
+const apiKey= 'AIzaSyCseWSb0T4rbAKc_as_DuULSjybA_D3X3U';
+  useEffect(() => {
+    loadGoogleMapsScript(initMap, apiKey);
+  }, [restaurant.latitude, restaurant.longitude, apiKey]);
 
   return (
     <Container >
+     <div ref={mapRef} style={{ height: '100px' }} />
       <Row className="justify-content-md-center"  style={{ backgroundColor: 'white', padding: '10px', borderRadius: '10px' }}>
         <Col xs={12} sm={10} md={8}>
 
@@ -32,6 +49,8 @@ export const RestaurantCard = (props) => {
                 <strong>City: </strong>
                 {restaurant.city}
               </Card.Text>
+             
+
               <img
                 src={restaurant.photosUrl[0]}
                 className="card-img-top"
