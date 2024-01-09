@@ -38,3 +38,7 @@ input[type="file"] {
     /*Set border color*/
     border: 1px solid #FF4CE7; 
 }
+
+.existing-photos{
+    margin-top:15px;
+}

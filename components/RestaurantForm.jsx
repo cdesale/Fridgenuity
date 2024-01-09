@@ -12,12 +12,17 @@ import "../assets/RestaurantForm.css";
 import cities from '../Data/mock_city_DB.json'
 import cuisines from '../Data/mocl_cuisine_DB.json'
 import { loadGoogleMapsScript, initAutocomplete, getPlaceDetails } from '../utils/mapApi';
-import { postRestaurant, getAllCuisines } from '../utils/api';
+import { postRestaurant, getRestaurantsByRestaurantId, patchRestaurant } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
-
-
+import { useContext } from "react";
+import { UserContext } from "../components/UserContext";
+import { useLocation } from 'react-router-dom';
 
 export const RestaurantForm = () => {
+  const { user } = useContext(UserContext);
+  const location = useLocation();
+  const { postedRestaurantId } = location.state || {};
+  const [userId, setUserId] = useState(user.userId);
   const defaultFormData = {
     city: "",
     cuisine: "",
@@ -27,7 +32,7 @@ export const RestaurantForm = () => {
     photosUrl: [],
     longitude: 0,
     latitude: 0,
-    userId: 1,
+    userId: userId,
     votes: 0,
     createAt: new Date().toISOString()
   };
@@ -38,6 +43,18 @@ export const RestaurantForm = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [error, setError] = useState([]);
 
+  useEffect(() => {
+    if (postedRestaurantId) {
+      getRestaurantsByRestaurantId(postedRestaurantId)
+        .then(response => {
+          const { id, ...dataWithoutId } = response.data;
+          setFormData({ ...defaultFormData, ...dataWithoutId });
+        })
+        .catch(error => {
+          console.error('Error fetching posted restaurant data:', error);
+        });
+    }
+  }, [postedRestaurantId]);
 
   useEffect(() => {
     loadGoogleMapsScript(() => {
@@ -69,29 +86,43 @@ export const RestaurantForm = () => {
       }));
     }
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let errorMessages = [];
-
     if (uploading) {
       errorMessages.push("Please wait until the file upload is completed");
     }
-
     if (!formData.photosUrl) {
       errorMessages.push("File has not been uploaded yet");
     }
-
     setError(errorMessages);
     if (errorMessages.length === 0) {
-      postRestaurant(formData)
-    .then(() => {
-      alert('Submission successful!');
-      navigate('/profile');
-    })
-    .catch(error => {
-      console.log(error)
-    });
+      const updatedFormData = { ...formData, userId: userId };
+      if (postedRestaurantId) {
+        // If restaurant id exists, call patchRestaurant
+        const changes = Object.keys(updatedFormData).map(key => ({
+          path: `/${key}`,
+          value: updatedFormData[key]
+        }));
+        patchRestaurant(postedRestaurantId, changes)
+          .then(() => {
+            alert('Update successful!');
+            navigate('/profile');
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
+        postRestaurant(updatedFormData)
+          .then(() => {
+            alert('Submission successful!');
+            navigate('/profile');
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      }
     }
   };
 
@@ -137,25 +168,26 @@ export const RestaurantForm = () => {
               <Form.Control
                 as="select"
                 name="city"
+                value={formData.city}
                 onChange={handleChange}
                 required
               > <option value="">Select a city</option>
-                {cities.map((city,index) => (
-          <option key={index}>
-            {city}
-          </option>
-        ))}
+                {cities.map((city, index) => (
+                  <option key={index}>
+                    {city}
+                  </option>
+                ))}
               </Form.Control>
             </Form.Group>
 
             <Form.Group controlId="formCuisine" className="form-group">
               <Form.Label className="form-label">Cuisine</Form.Label>
-              <Form.Control as="select" name="cuisine" onChange={handleChange} required>
-              <option value="">Select a cuisine</option>
-        {cuisines.map((cuisine, index) => (
-          <option key={index}>{cuisine}</option>
-        ))}
-      </Form.Control>
+              <Form.Control as="select" name="cuisine" value={formData.cuisine} onChange={handleChange} required>
+                <option value="">Select a cuisine</option>
+                {cuisines.map((cuisine, index) => (
+                  <option key={index}>{cuisine}</option>
+                ))}
+              </Form.Control>
             </Form.Group>
 
             <Form.Group controlId="formName" className="form-group">
@@ -163,6 +195,7 @@ export const RestaurantForm = () => {
               <Form.Control
                 type="text"
                 name="name"
+                value={formData.name}
                 onChange={handleChange}
                 required
               />
@@ -174,22 +207,24 @@ export const RestaurantForm = () => {
                 as="textarea"
                 rows={3}
                 name="description"
+                value={formData.description}
                 onChange={handleChange}
                 required
               />
             </Form.Group>
 
             <Form.Group className="form-group">
-    <Form.Label className="form-label">Address</Form.Label>
-    <Form.Control
-        type="text"
-        id="autocomplete"
-        name="address"
-        onFocus={initAutocomplete}
-        onChange={handleChange}
-        required
-    />
-</Form.Group>
+              <Form.Label className="form-label">Address</Form.Label>
+              <Form.Control
+                type="text"
+                id="autocomplete"
+                name="address"
+                value={formData.address}
+                onFocus={initAutocomplete}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
 
             <Form.Group controlId="formAddress" className="form-group">
               <Form.Label className="form-label">Upload restaurant photos:</Form.Label>
@@ -201,6 +236,11 @@ export const RestaurantForm = () => {
                 required
               />
             </Form.Group>
+            <div className="existing-photos">
+              {postedRestaurantId && formData.photosUrl.map((url) => (
+                <img src={url} style={{ maxWidth: '100px', margin: '5px' }} />
+              ))}
+            </div>
             {uploading && (
               <div className="progress-bar">
                 <div
