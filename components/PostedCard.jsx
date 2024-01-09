@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"
 
@@ -19,6 +19,7 @@ export const PostedCard = (props) => {
     window.open(mapUrl, '_blank');
   };
   return (
+
 
     <Card style={{ border: '0', maxHeight: '300px', fontSize: 'small', backgroundColor: 'white', margin: '15px' }}>
       <div onClick={handleIconClick} style={{ height: '30px', width: '30px', cursor: 'pointer' }}>
@@ -50,10 +51,11 @@ export const PostedCard = (props) => {
         />
       </Card.Body>
       <div style={{ display: 'flex', justifyContent: 'space-evenly', paddingBottom: '10px' }}>
-        <button onClick={navigateToForm}><img src="../assets/edit.png" alt="edit" style={{ width: '20px' }} /></button>
-        <button onClick={() => deleteRestaurant(restaurant.id)}><img src="../assets/delete.png" alt="delete" style={{ width: '20px' }} /></button>
+        <Button onClick={navigateToForm}><img src="../assets/edit.png" alt="edit" style={{ width: '20px', backgroundColor: '#4794F9', borderRadius: '20px', color:'#4794F9' }} /></Button>
+        <Button onClick={() => deleteRestaurant(restaurant.id)}><img src="../assets/delete.png" alt="delete" style={{ width: '20px', backgroundColor: '#47A0F9', borderRadius: '20px', color:'#4794F9', borderColor:'#4794F9' }} /></Button>
 
       </div>
     </Card>
+    
   );
 };

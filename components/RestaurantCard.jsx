@@ -23,11 +23,9 @@ const apiKey= 'AIzaSyCseWSb0T4rbAKc_as_DuULSjybA_D3X3U';
   }, [restaurant.latitude, restaurant.longitude, apiKey]);
 
   return (
-    <Container >
-     <div ref={mapRef} style={{ height: '100px' }} />
-      <Row className="justify-content-md-center"  style={{ backgroundColor: 'white', padding: '10px', borderRadius: '10px' }}>
-        <Col xs={12} sm={10} md={8}>
-
+    <Container>
+      <Row className="justify-content-md-center" style={{ backgroundColor: 'white', padding: '10px', borderRadius: '10px' }}>
+        <Col md={6}>
           <Card style={{ border: '0' }}>
             <Card.Body>
               <Card.Title>
@@ -59,7 +57,9 @@ const apiKey= 'AIzaSyCseWSb0T4rbAKc_as_DuULSjybA_D3X3U';
               />
             </Card.Body>
           </Card>
-          
+        </Col>
+        <Col md={6}>
+          <div ref={mapRef} style={{ height: '500px' }} />
         </Col>
       </Row>
     </Container>
