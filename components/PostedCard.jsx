@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom"
 
 export const PostedCard = (props) => {
@@ -28,8 +28,8 @@ export const PostedCard = (props) => {
         />
       </Card.Body>
       <div style={{ display: 'flex', justifyContent: 'space-evenly', paddingBottom: '10px' }}>
-        <Link to='/form'><button><img src="../assets/edit.png" alt="edit" style={{ width: '20px' }} /></button></Link>
-        <button onClick={() => deleteRestaurant(restaurant.id)}><img src="../assets/delete.png" alt="delete" style={{ width: '20px' }} /></button>
+        <Link to='/form'><Button style={{ backgroundColor: '#6DAAFB', borderRadius: '15px', border:'#6DAAFB' }}><img src="../assets/edit.png" alt="edit" style={{ width: '20px' }} /></Button></Link>
+        <Button onClick={() => deleteRestaurant(restaurant.id)} style={{ backgroundColor: '#6DAAFB', borderRadius: '15px', border:'#6DAAFB' }}><img src="../assets/delete.png" alt="delete" style={{ width: '20px' }} /></Button>
       </div>
     </Card>
   );

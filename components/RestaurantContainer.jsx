@@ -92,7 +92,7 @@ export const RestaurantContainer = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className=" mt-4" >
      <Link to="/form">
         <Button className="btn btn-primary mt-3" style={{ backgroundColor: '#1982DE', borderRadius: '20px', marginBottom:'18px'}}>
           Add Your Place🍝
