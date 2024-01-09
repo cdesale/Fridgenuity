@@ -14,19 +14,27 @@ const ProfilePage = () => {
     const [restaurants, setRestaurants] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState([]);
-
-    const fetchRestaurants = () => {
+    const id = user ? user.userId : null;
+    const name = user? user.userName :null;
+ 
+    const fetchRestaurants = (id) => {
         setIsLoading(true);
         setError('');
-
-        getRestaurantsByUserId()
+        
+        getRestaurantsByUserId(id)
             .then(({ data }) => {
                 setRestaurants(data);
                 setIsLoading(false);
             })
             .catch((error) => {
-                setError('Error fetching restaurants by userid');
                 setIsLoading(false);
+                if (error.response.status === 404) {
+                    setError('User not found.');
+                } else if (error.response.status === 400) {
+                    setError('User has not posted any restaurants.');
+                } else {
+                    setError('Error fetching restaurants by userid');   
+                }
                 console.error('Error fetching restaurants by userid:', error);
             });
     };
@@ -36,7 +44,7 @@ const ProfilePage = () => {
 
         deleteRestaurantById(restaurantId)
             .then(() => {
-                fetchRestaurants();
+                fetchRestaurants(id);
             })
             .catch((error) => {
                 setError('Error deleting restaurant');
@@ -46,7 +54,7 @@ const ProfilePage = () => {
 
 
     useEffect(() => {
-        fetchRestaurants();
+        fetchRestaurants(id);
     }, []);
 
 
@@ -56,6 +64,7 @@ const ProfilePage = () => {
                 <Row style={{ marginTop: '30px', minHeight:'50vh' }}>
                     <Col xs={1} />
                     <Col xs={10}>
+                        <h2>Welcome, {name}! </h2>
                         <div style={{ display: 'flex', justifyContent: 'space-between', margin:'20px' }}>
                             <Link to={"/restaurants"}>Homepage</Link>
                             {!user && (
@@ -63,9 +72,11 @@ const ProfilePage = () => {
                                     login/register
                                 </Link>
                             )}
+                             {user && (
                             <Link to="/form">
                                 <p>Post a new restaurant</p>
                             </Link>
+                             )}
                         </div>
 
                         {isLoading ? (
@@ -74,7 +85,7 @@ const ProfilePage = () => {
                             <p>{error}</p>
                         ) : (
                             <div>
-                                {restaurants.length > 0 ? (
+                                {restaurants ? (
                                     <Row>
                                         {restaurants.map((restaurant, index) => (
                                             <Col md={6} key={index}>
