@@ -6,7 +6,7 @@ export const PostedCard = (props) => {
   const { restaurant, deleteRestaurant } = props;
 
   return (
-    <Card style={{ border: '0', maxHeight: '300px', fontSize: 'small', backgroundColor: 'yellow', margin: '15px'}}>
+    <Card style={{ border: '0', maxHeight: '300px', fontSize: 'small', backgroundColor: 'white', margin: '15px'}}>
       <Card.Body>
         <Card.Title>
           <strong>Restaurant Name: </strong>

@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { UserContext } from "../components/UserContext";
+import FancyBox from '../components/FancyBox';
 
 const ProfilePage = () => {
     const { user } = useContext(UserContext);
@@ -53,7 +54,7 @@ const ProfilePage = () => {
     return (
         <>
             <Container fluid="md">
-                <Row style={{ marginTop: '30px', minHeight:'50vh' }}>
+            <Row style={{ marginTop: '30px', minHeight:'50vh', border:'white'}}>
                     <Col xs={1} />
                     <Col xs={10}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', margin:'20px' }}>
@@ -75,10 +76,10 @@ const ProfilePage = () => {
                         ) : (
                             <div>
                                 {restaurants.length > 0 ? (
-                                    <Row>
+                                    <Row  style={{ border:'white'}}>
                                         {restaurants.map((restaurant, index) => (
                                             <Col md={6} key={index}>
-                                                <PostedCard restaurant={restaurant} deleteRestaurant={deleteRestaurant} />
+                                              <FancyBox> <PostedCard restaurant={restaurant} deleteRestaurant={deleteRestaurant} /></FancyBox>
                                             </Col>
                                         ))}
                                     </Row>
@@ -89,7 +90,7 @@ const ProfilePage = () => {
                         )}
                     </Col>
                     <Col xs={1} />
-                </Row>
+               </Row>
             </Container>
         </>
 

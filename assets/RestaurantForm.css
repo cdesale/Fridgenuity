@@ -4,6 +4,7 @@
 
 .row {
     border: solid 2px #FF4CE7;
+    border-radius: 10px;
 }
 
 .form-group {
