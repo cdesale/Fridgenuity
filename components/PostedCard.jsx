@@ -1,8 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom"
 
 
