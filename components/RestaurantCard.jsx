@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 
 
 export const RestaurantCard = (props) => {
@@ -7,10 +8,10 @@ export const RestaurantCard = (props) => {
 
   return (
     <Container >
-      <Row className="justify-content-md-center" style={{ backgroundColor: 'white', padding: '10px', borderRadius: '10px'}}>
-      <Col xs={12} sm={10} md={8}>
-          
-          <Card style={{border: '0'}}>
+      <Row className="justify-content-md-center" style={{ backgroundColor: 'white', padding: '10px', borderRadius: '10px' }}>
+        <Col xs={12} sm={10} md={8}>
+
+          <Card style={{ border: '0' }}>
             <Card.Body>
               <Card.Title>
                 <strong>Restaurant Name: </strong>
@@ -25,20 +26,24 @@ export const RestaurantCard = (props) => {
               </Card.Text>
               <Card.Text>
                 <strong>Address: </strong>
-                {restaurant.address}, {restaurant.city}
+                {restaurant.address}
+              </Card.Text>
+              <Card.Text>
+                <strong>City: </strong>
+                {restaurant.city}
               </Card.Text>
               <img
-                src={restaurant.photosUrl}
+                src={restaurant.photosUrl[0]}
                 className="card-img-top"
                 alt={`Photo of ${restaurant.name}`}
-                style={{ maxWidth: '80%', maxHeight: '300px' }} 
+                style={{ maxWidth: '80%', maxHeight: '300px' }}
               />
             </Card.Body>
-         </Card>
-        
+          </Card>
+
         </Col>
       </Row>
-   </Container>
+    </Container>
   );
 };
 

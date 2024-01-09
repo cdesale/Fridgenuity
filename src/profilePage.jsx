@@ -53,18 +53,20 @@ const ProfilePage = () => {
     return (
         <>
             <Container fluid="md">
-                <Row style={{ marginTop: '30px' }}>
+                <Row style={{ marginTop: '30px', minHeight:'50vh' }}>
                     <Col xs={1} />
                     <Col xs={10}>
-                        Hello user, welcome to your grammable location page!
-                           {!user && (
-              <Link to={"/"}>
-                Please login/register to create your profile page
-              </Link>
-            )}
-                        <Link to="/form">
-                            <p>Post a new restaurant here</p>
-                        </Link>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', margin:'20px' }}>
+                            <Link to={"/restaurants"}>Homepage</Link>
+                            {!user && (
+                                <Link to={"/"}>
+                                    login/register
+                                </Link>
+                            )}
+                            <Link to="/form">
+                                <p>Post a new restaurant</p>
+                            </Link>
+                        </div>
 
                         {isLoading ? (
                             <p>Loading...</p>
@@ -76,7 +78,7 @@ const ProfilePage = () => {
                                     <Row>
                                         {restaurants.map((restaurant, index) => (
                                             <Col md={6} key={index}>
-                                                <PostedCard restaurant={restaurant} deleteRestaurant={deleteRestaurant}/>
+                                                <PostedCard restaurant={restaurant} deleteRestaurant={deleteRestaurant} />
                                             </Col>
                                         ))}
                                     </Row>

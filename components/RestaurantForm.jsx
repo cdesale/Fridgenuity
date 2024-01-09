@@ -10,8 +10,11 @@ import {
 import Error from "./Error";
 import "../assets/RestaurantForm.css";
 import cities from '../Data/mock_city_DB.json'
+import cuisines from '../Data/mocl_cuisine_DB.json'
 import { loadGoogleMapsScript, initAutocomplete, getPlaceDetails } from '../utils/mapApi';
 import { postRestaurant, getAllCuisines } from '../utils/api';
+import { useNavigate } from 'react-router-dom';
+
 
 
 export const RestaurantForm = () => {
@@ -28,13 +31,13 @@ export const RestaurantForm = () => {
     votes: 0,
     createAt: new Date().toISOString()
   };
-
+  let navigate = useNavigate();
   const [formData, setFormData] = useState(defaultFormData);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [error, setError] = useState([]);
-  const [cuisines, setCuisines] = useState([]);
+
 
   useEffect(() => {
     loadGoogleMapsScript(() => {
@@ -50,14 +53,6 @@ export const RestaurantForm = () => {
         }
       });
     }, 'AIzaSyCseWSb0T4rbAKc_as_DuULSjybA_D3X3U');
-  }, []);
-
-  useEffect(() => {
-    getAllCuisines()
-      .then(cuisinesData => {
-        setCuisines(cuisinesData.data); 
-      })
-      .catch(error => console.error('Error fetching cuisines:', error));
   }, []);
 
   const handleChange = (e) => {
@@ -89,8 +84,14 @@ export const RestaurantForm = () => {
 
     setError(errorMessages);
     if (errorMessages.length === 0) {
-      console.log(formData); 
       postRestaurant(formData)
+    .then(() => {
+      alert('Submission successful!');
+      navigate('/profile');
+    })
+    .catch(error => {
+      console.log(error)
+    });
     }
   };
 
@@ -138,7 +139,7 @@ export const RestaurantForm = () => {
                 name="city"
                 onChange={handleChange}
                 required
-              >
+              > <option value="">Select a city</option>
                 {cities.map((city,index) => (
           <option key={index}>
             {city}
@@ -150,8 +151,9 @@ export const RestaurantForm = () => {
             <Form.Group controlId="formCuisine" className="form-group">
               <Form.Label className="form-label">Cuisine</Form.Label>
               <Form.Control as="select" name="cuisine" onChange={handleChange} required>
+              <option value="">Select a cuisine</option>
         {cuisines.map((cuisine, index) => (
-          <option key={index} value={cuisine.toLowerCase()}>{cuisine}</option>
+          <option key={index}>{cuisine}</option>
         ))}
       </Form.Control>
             </Form.Group>

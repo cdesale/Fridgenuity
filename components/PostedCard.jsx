@@ -6,7 +6,7 @@ export const PostedCard = (props) => {
   const { restaurant, deleteRestaurant } = props;
 
   return (
-    <Card style={{ border: '0', maxHeight: '300px', fontSize: 'small', backgroundColor: 'yellow', margin: '15px' }}>
+    <Card style={{ border: '0', maxHeight: '300px', fontSize: 'small', backgroundColor: 'yellow', margin: '15px'}}>
       <Card.Body>
         <Card.Title>
           <strong>Restaurant Name: </strong>
@@ -18,7 +18,7 @@ export const PostedCard = (props) => {
         </Card.Text>
         <Card.Text>
           <strong>Address: </strong>
-          {restaurant.address}, {restaurant.city}
+          {restaurant.address}
         </Card.Text>
         <img
           src={restaurant.photosUrl}
