@@ -105,7 +105,7 @@ export const RestaurantForm = () => {
           path: `/${key}`,
           value: updatedFormData[key]
         }));
-        patchRestaurant(postedRestaurantId, changes)
+        patchRestaurant(postedRestaurantId, changes, user.token)
           .then(() => {
             alert('Update successful!');
             navigate('/profile');
@@ -114,7 +114,7 @@ export const RestaurantForm = () => {
             console.log(error);
           });
       } else {
-        postRestaurant(updatedFormData)
+        postRestaurant(updatedFormData, user.token)
           .then(() => {
             alert('Submission successful!');
             navigate('/profile');

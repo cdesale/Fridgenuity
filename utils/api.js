@@ -14,7 +14,6 @@ export const getRestaurantsByCity = (city) => {
   });
 };
 
-
 export const getAllCuisines = () => {
   let url = "http://localhost:5106/restaurants/cuisines";
   return axios.get(url).then(({ data }) => {
@@ -23,7 +22,9 @@ export const getAllCuisines = () => {
 };
 
 export const getRestaurantsByCuisine = (cuisine) => {
-  let url = cuisine ? `http://localhost:5106/restaurants/cuisine/${cuisine}` : `http://localhost:5106/restaurants`;
+  let url = cuisine
+    ? `http://localhost:5106/restaurants/cuisine/${cuisine}`
+    : `http://localhost:5106/restaurants`;
   return axios.get(url).then(({ data }) => {
     return { data };
   });
@@ -43,12 +44,13 @@ export const getCuisinesByCity = (city) => {
   });
 };
 
-export const deleteRestaurantById = (id) => {
+export const deleteRestaurantById = (id, token) => {
   let url = `http://localhost:5106/restaurants/${id}`;
-  return axios.delete(url)
-    .then(response => response.status === 200)
+  return axios
+    .delete(url, getAuthenticationHeader(token))
+    .then((response) => response.status === 200)
     .catch(() => false);
-}
+};
 
 export const getRestaurantsByUserId = (id) => {
   let url = `http://localhost:5106/restaurants/user/${id}`;
@@ -57,28 +59,37 @@ export const getRestaurantsByUserId = (id) => {
   });
 };
 
-export const postRestaurant = (formData) => {
+export const postRestaurant = (formData, token) => {
   let url = `http://localhost:5106/restaurants`;
-  return axios.post(url, formData).then(({ data }) => {
-    return { data };
-  });
+  return axios
+    .post(url, formData, getAuthenticationHeader(token))
+    .then(({ data }) => {
+      return { data };
+    });
 };
 
-export const getRestaurantsByRestaurantId = (id)=>{
+export const getRestaurantsByRestaurantId = (id) => {
   let url = `http://localhost:5106/restaurants/${id}`;
   return axios.get(url).then(({ data }) => {
     return { data };
   });
-}
+};
 
-export const patchRestaurant = (restaurantId, changes) => {
+export const patchRestaurant = (restaurantId, changes, token) => {
   const url = `http://localhost:5106/restaurants/${restaurantId}`;
-  const requestBody = changes.map(change => ({
+  const requestBody = changes.map((change) => ({
     op: "replace",
     path: change.path,
-    value: change.value
+    value: change.value,
   }));
-    return axios.patch(url, requestBody).then(({ data }) => {
+  return axios
+    .patch(url, requestBody, getAuthenticationHeader(token))
+    .then(({ data }) => {
       return { data };
     });
+};
+
+const getAuthenticationHeader = (token) => {
+  //authorization of post
+  return { headers: { Authorization: `Bearer ${token}` } };
 };
