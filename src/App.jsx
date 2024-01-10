@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-import Header from "./header";
+import "../assets/App.css";
+import Header from "../components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomePage from "./homePage";
-import ProfilePage from "./profilePage";
+import ProfilePage from "../components/ProfilePage";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import { RestaurantContainer } from "../components/RestaurantContainer";

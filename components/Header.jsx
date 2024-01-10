@@ -1,6 +1,6 @@
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
-import Logout from '../components/Logout';
+import Logout from './Logout';
 
 const Header = () => {
 

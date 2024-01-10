@@ -1,13 +1,13 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { PostedCard } from "../components/PostedCard";
+import { PostedCard } from "./PostedCard";
 import { getRestaurantsByUserId, deleteRestaurantById } from "../utils/api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../components/UserContext";
-import FancyBox from "../components/FancyBox";
+import { UserContext } from "./UserContext";
+import FancyBox from "./FancyBox";
 
 const ProfilePage = () => {
   const { user } = useContext(UserContext);

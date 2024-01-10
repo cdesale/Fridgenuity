@@ -1,17 +1,28 @@
-This is the link to the deployed version: 
+# Frontend for Get Gramming
 
-This is a restuarnt recommendation app. User can login to their profile or register for a new account in the first page of the app. They have the option to choose skipping the login/register, and link them directly to the list of restaurant recommendation, which is our home page. In Home, user can search restaurant by typing in city, they can also sort according to cuisine type. They will see information about the restaurant, including name, description, address and also the pinned google map. If user is singed in, they can add their recommendation, which will navigate them to the form. Once, they submit the form, it will be added to their profile page, where they can patch or delete their submittion. Simply click the logout button in the header, if they want to. 
+## About Get Gramming
+Get Gramming is a restaurant recommendation app with the following features:
 
-This is the backend repo link: https://github.com/mimimingfei/Get-Gramming-BackEnd.git
+- User Registration/Login: New users can register or existing users can log in on the app's first page.
+- Home Page: Displays a list of restaurant recommendations. Users can search for restaurants by city or cuisine type. Each listing includes the restaurant's name, description, address, and location on Google Maps.
+- Adding Recommendations: Signed-in users can post their own recommendations by completing a form.
+- Managing Recommendations: Users can edit or delete their recommendations from their profile page.
+- Logout: Users can log out via the logout button.
 
-The package we need to install before running locally are, 
- "react-bootstrap": "^2.9.2",
- "react-dom": "^18.2.0",
- "react-router-dom": "^6.21.1",
- "proxy": "^2.1.1",
- "react": "^18.2.0",
- "firebase": "^10.7.1",
- "express": "^4.18.2",
- "axios": "^1.6.4"
 
-In order to run the project locally, we should do 'git clone https://github.com/cdesale/Get-Gramming-FE', 'cd Get-Gramming-FE', and 'npm run dev'.
+## Deployed Version
+- link:
+
+## Tools and Technology
+- Frontend is built in React.
+- Google Maps API is used to enable autocomplete address, obtain longitude and latitude, render address on maps.
+- Uploaded photos are stored in Firebase.
+
+## Set-Up
+- In Visual Studio Code terminal, run `git clone https://github.com/cdesale/Get-Gramming-FE.git`
+- Go to repository `cd Get-Gramming-FE`
+- Run `npm install` to install packages.
+- Run `npm run dev` to start the server.
+  
+The link to BackEnd repository for GetGramming web application: https://github.com/mimimingfei/Get-Gramming-BackEnd.git
+
