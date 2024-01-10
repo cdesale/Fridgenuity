@@ -1,18 +1,58 @@
+.posted-card {
+  border: 0;
+  max-height: 500px;
+  min-height: 300px;
+  font-size: small;
+  background-color: white;
+  margin: 15px;
+}
+
+.posted-card .cuisine {
+  margin-right: 10px;
+}
+
+.card-img-top {
+  max-width: 50%;
+  max-height: 100px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
+}
+
+.edit-button, .delete-button {
+  background-color: #47A0F9;
+  border-radius: 13px;
+  border: none;
+}
+
+.edit-button img, .delete-button img {
+  width: 20px;
+  background-color: #47A0F9;
+  border-radius: 20px;
+}
+
+
+@media (max-width: 430px) {
+  .posted-card {
+    font-size: x-small;
+    min-height: 280px;
+  }
+
+  .card-img-top {
+    max-width: 100%;
+  }
+
+  .edit-button, .delete-button {
+    margin-bottom: 5px;
+    max-width: 40px;
+  }
+}
+
 @media (min-width: 768px) {
-    .posted-card {
-      max-height: 500px;
-    }
+  .posted-card {
+    height: 400px;
   }
-
-  @media (min-width: 1000px) {
-    .posted-card {
-      max-height: 800px;  
-    .card-img-top{
-        max-height: 150px; 
-      }
-    }
-  }
-
-
-
-  
+}

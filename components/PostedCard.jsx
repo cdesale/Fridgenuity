@@ -17,15 +17,7 @@ export const PostedCard = (props) => {
     window.open(mapUrl, "_blank");
   };
   return (
-    <Card className="posted-card"
-      style={{
-        border: "0",
-        maxHeight: "300px",
-        fontSize: "small",
-        backgroundColor: "white",
-        margin: "15px",
-      }}
-    >
+    <Card className="posted-card" >
       <div
         onClick={handleIconClick}
         style={{ height: "30px", width: "30px", cursor: "pointer" }}
@@ -42,7 +34,7 @@ export const PostedCard = (props) => {
           {restaurant.name}
         </Card.Title>
 
-        <Card.Text style={{ marginRight: "10px" }}>
+        <Card.Text className="cuisine">
           <strong>Cuisine type: </strong>
           {restaurant.cuisine}
         </Card.Text>
@@ -55,21 +47,10 @@ export const PostedCard = (props) => {
           src={restaurant.photosUrl}
           className="card-img-top"
           alt={`Photo of ${restaurant.name}`}
-          style={{ maxWidth: "50%", maxHeight: "100px" }}
         />
       </Card.Body>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          paddingBottom: "10px",
-        }}
-      >
-        <Button onClick={navigateToForm} style={{
-              backgroundColor: "#47A0F9",
-              borderRadius:'13px',
-              border:"#47A0F9"
-            }} >
+      <div className="button-container">
+        <Button onClick={navigateToForm}  className="edit-button">
           <img
             src="../assets/edit.png"
             alt="edit"
@@ -82,11 +63,7 @@ export const PostedCard = (props) => {
             }}
           />
         </Button>
-        <Button onClick={() => deleteRestaurant(restaurant.id)} style={{
-              backgroundColor: "#47A0F9",
-              borderRadius:'13px',
-              border:"#47A0F9"
-            }}>
+        <Button onClick={() => deleteRestaurant(restaurant.id)} className="delete-button">
           <img
             src="../assets/delete.png"
             alt="delete"

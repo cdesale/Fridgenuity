@@ -233,7 +233,7 @@ export const RestaurantForm = () => {
                 name="photo"
                 onChange={handleChange}
                 disabled={uploading}
-                required
+                required={formData.photosUrl.length === 0}
               />
             </Form.Group>
             <div className="existing-photos">
