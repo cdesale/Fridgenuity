@@ -53,7 +53,11 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    fetchRestaurants(id);
+    if (id === null) {
+      setError("Please register to create your profile!");
+    } else {
+      fetchRestaurants(id);
+    }
   }, []);
 
   return (
@@ -62,7 +66,7 @@ const ProfilePage = () => {
         <Row style={{ marginTop: "30px", minHeight: "50vh", border: "white" }}>
           <Col xs={1} />
           <Col xs={10}>
-            <h2>Welcome, {name}! </h2>
+            <h2>Welcome{user && `, ${name}`}! </h2>
             <div
               style={{
                 display: "flex",
