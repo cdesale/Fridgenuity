@@ -1,0 +1,18 @@
+@media (min-width: 768px) {
+    .posted-card {
+      max-height: 500px;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .posted-card {
+      max-height: 800px;  
+    .card-img-top{
+        max-height: 150px; 
+      }
+    }
+  }
+
+
+
+  

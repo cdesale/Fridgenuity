@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import '../assets/PostedCard.css';
 export const PostedCard = (props) => {
   const { restaurant, deleteRestaurant } = props;
   const postedRestaurantId = restaurant.id;
@@ -17,7 +17,7 @@ export const PostedCard = (props) => {
     window.open(mapUrl, "_blank");
   };
   return (
-    <Card
+    <Card className="posted-card"
       style={{
         border: "0",
         maxHeight: "300px",
@@ -65,19 +65,28 @@ export const PostedCard = (props) => {
           paddingBottom: "10px",
         }}
       >
-        <Button onClick={navigateToForm}>
+        <Button onClick={navigateToForm} style={{
+              backgroundColor: "#47A0F9",
+              borderRadius:'13px',
+              border:"#47A0F9"
+            }} >
           <img
             src="../assets/edit.png"
             alt="edit"
             style={{
               width: "20px",
-              backgroundColor: "#4794F9",
+              backgroundColor: "#47A0F9",
               borderRadius: "20px",
-              color: "#4794F9",
+              color: "#47A0F9",
+              border:"#47A0F9"
             }}
           />
         </Button>
-        <Button onClick={() => deleteRestaurant(restaurant.id)}>
+        <Button onClick={() => deleteRestaurant(restaurant.id)} style={{
+              backgroundColor: "#47A0F9",
+              borderRadius:'13px',
+              border:"#47A0F9"
+            }}>
           <img
             src="../assets/delete.png"
             alt="delete"
@@ -85,8 +94,8 @@ export const PostedCard = (props) => {
               width: "20px",
               backgroundColor: "#47A0F9",
               borderRadius: "20px",
-              color: "#4794F9",
-              borderColor: "#4794F9",
+              color: "#47A0F9",
+              border:"#47A0F9"
             }}
           />
         </Button>
