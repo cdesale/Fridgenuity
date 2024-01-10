@@ -5,6 +5,7 @@
   font-size: small;
   background-color: white;
   margin: 15px;
+  position: relative;
 }
 
 .posted-card .cuisine {
@@ -19,7 +20,11 @@
 .button-container {
   display: flex;
   justify-content: space-evenly;
-  padding-bottom: 10px;
+  position: absolute; 
+  bottom: -10px; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  gap: 100px;
 }
 
 .edit-button, .delete-button {
@@ -46,13 +51,26 @@
   }
 
   .edit-button, .delete-button {
-    margin-bottom: 5px;
     max-width: 40px;
+  }
+  .button-container {
+    gap: 50px;
+    bottom: -30px; 
+  }
+  .posted-card .card-img-top {
+    max-width: 80%; 
+    max-height: 100px;
   }
 }
 
 @media (min-width: 768px) {
   .posted-card {
-    height: 400px;
+    height: 380px;
+  }
+  .posted-card .card-img-top {
+    max-height: 130px; 
+  }
+  .button-container {
+    bottom: 10px; 
   }
 }
