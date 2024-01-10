@@ -114,7 +114,7 @@ export const RestaurantContainer = () => {
               marginBottom: "25px",
             }}
           >
-            Add Your Place🍝
+            Add a Restaurant🍝
           </Button>
         </Link>
       )}
