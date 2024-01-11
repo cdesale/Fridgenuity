@@ -9,10 +9,6 @@ Get Gramming is a restaurant recommendation app with the following features:
 - Managing Recommendations: Users can edit or delete their recommendations from their profile page.
 - Logout: Users can log out via the logout button.
 
-
-## Deployed Version
-- link:
-
 ## Tools and Technology
 - Frontend is built in React.
 - Google Maps API is used to enable autocomplete address, obtain longitude and latitude, render address on maps.
