@@ -70,6 +70,7 @@ export const LogInRegister = () => {
     }
 
     register(username, emailID, password).then(({ data }) => {
+      alert("Registration successful");
       setUser(data);
       navigate("/restaurants");
     });
